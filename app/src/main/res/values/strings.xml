@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Sikasir</string>
+    <string name="masuk_sebagai_admin">Masuk Sebagai Admin</string>
+    <string name="masuk_sebagai_kasir">Masuk Sebagai Kasir</string>
+    <string name="username">Username</string>
+    <string name="user_level">User Level</string>
+    <string name="admin">ADMIN</string>
+    <string name="kasir">KASIR</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Masuk</string>
+    <string name="error_blank_field">Field ini tidak boleh kosong</string>
+    <string name="error_wrong_user_level">Data yang anda masukkan tidak ditemukan</string>
+    <string name="selamat_datang_sikasir">Selamat datang, sikasir</string>
+</resources>
