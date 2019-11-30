@@ -42,9 +42,6 @@ public class LandingActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
         Intent intent = new Intent();
-        String message = "Sorry, this feature is not available yet";
-        int duration = Snackbar.LENGTH_LONG;
-        View object;
         switch (view.getId()) {
             case R.id.btn_log_out:
                 intent = new Intent(this, MainActivity.class);
@@ -53,19 +50,13 @@ public class LandingActivity extends AppCompatActivity implements View.OnClickLi
                 intent = new Intent(this, SeeTransactionActivity.class);
                 break;
             case R.id.btn_input_data_stok:
-//                intent = new Intent(this, InputStockActivity.class);
-                object = findViewById(R.id.btn_input_data_stok);
-                showSnackbar(object, message, duration);
+                intent = new Intent(this, InputStockActivity.class);
                 break;
             case R.id.btn_input_data_transaksi:
-//                intent = new Intent(this, InputTransactionActivity.class);
-                object = findViewById(R.id.btn_input_data_transaksi);
-                showSnackbar(object, message, duration);
+                intent = new Intent(this, InputTransactionActivity.class);
                 break;
             case R.id.btn_update_data:
-//                intent = new Intent(this, UpdateDataActivity.class);
-                object = findViewById(R.id.btn_update_data);
-                showSnackbar(object, message, duration);
+                intent = new Intent(this, UpdateDataActivity.class);
                 break;
             default:
                 break;
