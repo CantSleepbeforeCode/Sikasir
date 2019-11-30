@@ -17,4 +17,9 @@
     <string name="update_delete_data_stok_barang">Update/Delete Data Stok Barang</string>
     <string name="lihat_transaksi_per_tanggal">Lihat Transaksi per Tanggal</string>
     <string name="input_data_transaksi">Input Data Transaksi</string>
+    <string name="transaction">Transaction</string>
+    <string name="hint_transaction_search">Tanggal/Bulan/Tahun</string>
+    <string name="dummy_date">02/02/2012</string>
+    <string name="dummy_category">Ban Motor</string>
+    <string name="dummy_id">AAXC</string>
 </resources>

@@ -48,31 +48,29 @@ public class LandingActivity extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()) {
             case R.id.btn_log_out:
                 intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
                 break;
             case R.id.btn_see_transaction:
-//                intent = new Intent(this, SeeTransaction.class);
-                object = findViewById(R.id.btn_see_transaction);
-                showSnackbar(object, message, duration);
+                intent = new Intent(this, SeeTransactionActivity.class);
                 break;
             case R.id.btn_input_data_stok:
-//                intent = new Intent(this, InputStok.class);
+//                intent = new Intent(this, InputStockActivity.class);
                 object = findViewById(R.id.btn_input_data_stok);
                 showSnackbar(object, message, duration);
                 break;
             case R.id.btn_input_data_transaksi:
-//                intent = new Intent(this, InputTransaction.class);
+//                intent = new Intent(this, InputTransactionActivity.class);
                 object = findViewById(R.id.btn_input_data_transaksi);
                 showSnackbar(object, message, duration);
                 break;
             case R.id.btn_update_data:
-//                intent = new Intent(this, UpdateData.class);
+//                intent = new Intent(this, UpdateDataActivity.class);
                 object = findViewById(R.id.btn_update_data);
                 showSnackbar(object, message, duration);
                 break;
             default:
                 break;
         }
+        startActivity(intent);
     }
 
     public void showSnackbar(View view, String message, int duration){
