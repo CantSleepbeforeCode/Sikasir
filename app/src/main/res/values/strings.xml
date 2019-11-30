@@ -10,5 +10,11 @@
     <string name="sign_in">Masuk</string>
     <string name="error_blank_field">Field ini tidak boleh kosong</string>
     <string name="error_wrong_user_level">Data yang anda masukkan tidak ditemukan</string>
-    <string name="selamat_datang_sikasir">Selamat datang, sikasir</string>
+    <string name="selamat_datang_sikasir">Welcome, sikasir</string>
+    <string name="selamat_datang_siadmin">Welcome, siadmin</string>
+    <string name="logout">Keluar</string>
+    <string name="input_data_stok_barang">Input Data Stok Barang</string>
+    <string name="update_delete_data_stok_barang">Update/Delete Data Stok Barang</string>
+    <string name="lihat_transaksi_per_tanggal">Lihat Transaksi per Tanggal</string>
+    <string name="input_data_transaksi">Input Data Transaksi</string>
 </resources>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.LandingActivity">
+
+    <Toolbar
+        android:id="@+id/toolbar_landing"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:elevation="10dp"
+        android:background="@drawable/header_home"/>
+
+    <ImageView
+        android:id="@+id/circle1"
+        android:layout_width="134dp"
+        android:layout_height="134dp"
+        android:layout_below="@+id/toolbar_landing"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="-50dp"
+        android:src="@drawable/circlet" />
+
+    <ImageView
+        android:id="@+id/circle2"
+        android:layout_width="182dp"
+        android:layout_height="182dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-87dp"
+        android:layout_marginBottom="-40dp"
+        android:src="@drawable/circle" />
+
+    <TextView
+        android:id="@+id/txt_welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:elevation="10dp"
+        tools:text="@string/selamat_datang_siadmin"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/btn_log_out"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_welcome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bt_uiborder"
+        android:elevation="100dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/logout"
+        android:stateListAnimator="@null"
+        android:textColor="@color/colorPurple" />
+
+
+    <ScrollView
+        android:id="@+id/sv_landing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin"
+                android:layout_marginEnd="@dimen/default_margin">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="35dp"
+                    android:paddingBottom="35dp">
+
+                    <Button
+                        android:id="@+id/btn_input_data_stok"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/bt_uisquare"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/input_data_stok_barang"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white" />
+
+                    <Button
+                        android:id="@+id/btn_update_data"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@id/btn_input_data_stok"
+                        android:background="@drawable/bt_uisquare"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/update_delete_data_stok_barang"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white" />
+
+                    <Button
+                        android:id="@+id/btn_see_transaction"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@id/btn_update_data"
+                        android:background="@drawable/bt_uisquare"
+                        android:text="@string/lihat_transaksi_per_tanggal"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

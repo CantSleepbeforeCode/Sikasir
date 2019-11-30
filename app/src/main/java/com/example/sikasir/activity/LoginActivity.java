@@ -25,7 +25,6 @@ public class LoginActivity extends AppCompatActivity {
     public static final String EXTRA_USER = "extra_user";
 
     EditText edtUsername, edtPassword;
-    TextInputLayout layoutUsername, layoutPassword;
     Button btnLogin;
     UserHelper userHelper;
 
@@ -33,14 +32,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         userHelper = new UserHelper(this);
 
         edtUsername = findViewById(R.id.ipt_username);
         edtPassword = findViewById(R.id.ipt_password);
-        layoutUsername = findViewById(R.id.layout_username);
-        layoutPassword = findViewById(R.id.layout_password);
         btnLogin = findViewById(R.id.btn_login);
 
         TextView txtUserLevel = findViewById(R.id.txt_user_level);
@@ -91,18 +87,16 @@ public class LoginActivity extends AppCompatActivity {
 
         if (username.isEmpty()) {
             valid = false;
-            layoutUsername.setError(getString(R.string.error_blank_field));
+            Toast.makeText(getApplicationContext(), "Username Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
         } else {
             valid = true;
-            layoutUsername.setError(null);
         }
 
         if (password.isEmpty()) {
             valid = false;
-            layoutPassword.setError(getString(R.string.error_blank_field));
+            Toast.makeText(getApplicationContext(), "Password Tidak Boleh Kosong", Toast.LENGTH_SHORT).show();
         } else {
             valid = true;
-            layoutPassword.setError(null);
         }
         return valid;
     }
