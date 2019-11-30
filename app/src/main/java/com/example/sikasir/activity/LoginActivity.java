@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText edtUsername, edtPassword;
     Button btnLogin;
+    ProgressBar pgLoading;
     UserHelper userHelper;
 
     @Override
@@ -38,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         edtUsername = findViewById(R.id.ipt_username);
         edtPassword = findViewById(R.id.ipt_password);
         btnLogin = findViewById(R.id.btn_login);
+        pgLoading = findViewById(R.id.pb_loading);
 
         TextView txtUserLevel = findViewById(R.id.txt_user_level);
 
@@ -51,6 +54,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (validate()) {
+                    pgLoading.setVisibility(View.VISIBLE);
+                    btnLogin.setEnabled(false);
                     String username = edtUsername.getText().toString();
                     String password = edtPassword.getText().toString();
 
@@ -60,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                         new Handler().postDelayed(new Runnable() {
                             public void run() {
                                 Intent intent = new Intent();
+                                pgLoading.setVisibility(View.INVISIBLE);
                                 if (userHelper.userLevel.equals(getIntent().getStringExtra(EXTRA_USER))) {
                                     intent = new Intent(LoginActivity.this, LandingActivity.class);
                                     intent.putExtra("KEY_ID", userHelper.idUser);

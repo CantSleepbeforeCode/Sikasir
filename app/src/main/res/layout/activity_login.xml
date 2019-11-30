@@ -7,6 +7,15 @@
     android:layout_height="match_parent"
     tools:context=".activity.LoginActivity">
 
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="1dp"
+        android:visibility="invisible"
+        android:layout_centerInParent="true"/>
+
     <Toolbar
         android:id="@+id/bg_header"
         android:layout_width="match_parent"

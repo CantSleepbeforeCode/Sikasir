@@ -5,12 +5,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.sikasir.entity.User;
 
 import java.util.ArrayList;
 
 import static android.provider.BaseColumns._ID;
+import static com.example.sikasir.database.DatabaseContract.TABLE_PRODUCT;
+import static com.example.sikasir.database.DatabaseContract.TABLE_TRANSACTION;
 import static com.example.sikasir.database.DatabaseContract.TABLE_USER;
 import static com.example.sikasir.database.DatabaseContract.userColumn.ID;
 import static com.example.sikasir.database.DatabaseContract.userColumn.PASSWORD;
