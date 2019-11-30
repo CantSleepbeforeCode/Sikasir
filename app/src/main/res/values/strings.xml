@@ -22,15 +22,12 @@
     <string name="dummy_date">02/02/2012</string>
     <string name="dummy_category">Ban Motor</string>
     <string name="dummy_id">AAXC</string>
-    <string name="input_data_transaksi">Input Data Transaksi</string>
     <string name="kode_barang">Kode Barang</string>
     <string name="jumlah_barang">Jumlah Barang</string>
     <string name="tambah_barang">Tambah Barang</string>
     <string name="simpan">Simpan</string>
-    <string name="input_data_stok_barang">Input Data Stok Barang</string>
     <string name="kategori_barang">Kategori Barang</string>
     <string name="nama_barang">Nama Barang</string>
-    <string name="jumlah_barang">Jumlah Barang</string>
     <string name="harga_jual">Harga Jual</string>
     <string name="update_data_stok_barang">Update Data Stok Barang</string>
     <string name="data_barang">Data Barang</string>
