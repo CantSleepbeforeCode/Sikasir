@@ -3,9 +3,11 @@ package com.example.sikasir.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.sikasir.R;
 
@@ -26,20 +28,14 @@ public class InputTransactionActivity extends AppCompatActivity {
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (iptIdBarang.getText() !=  null) {
-                    String id = iptIdBarang.getText().toString();
-                    if (iptSumBarang != null) {
-                        String sum = iptIdBarang.getText().toString();
-                        if (iptUangBayar != null) {
+                Log.d("button", "tepencet");
+                String id = iptIdBarang.getText().toString();
+                String sum = iptIdBarang.getText().toString();
+                String money = iptUangBayar.getText().toString();
+                if (!id.equals("") && !sum.equals("")  && !money.equals("")) {
 
-                        } else {
-                            iptUangBayar.setError(getString(R.string.error_blank_field));
-                        }
-                    } else {
-                        iptSumBarang.setError(getString(R.string.error_blank_field));
-                    }
                 } else {
-                    iptIdBarang.setError(getString(R.string.error_blank_field));
+                    Toast.makeText(getApplicationContext(), "Field tidak boleh ada kosong", Toast.LENGTH_SHORT).show();
                 }
             }
         });
