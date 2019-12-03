@@ -86,6 +86,28 @@
                     android:inputType="text"
                     android:padding="10dp" />
 
+                <TextView
+                    android:id="@+id/tv_uang_bayar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_below="@id/ipt_sum_barang"
+                    android:text="@string/uang_diterima"
+                    android:textColor="@color/colorPurple"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/ipt_uang_bayar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_uang_bayar"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:drawablePadding="30dp"
+                    android:inputType="text"
+                    android:padding="10dp" />
+
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
@@ -93,6 +115,7 @@
     </RelativeLayout>
 
     <Button
+        android:id="@+id/btn_simpan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/simpan"

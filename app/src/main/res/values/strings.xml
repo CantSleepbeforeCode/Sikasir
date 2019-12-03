@@ -31,4 +31,5 @@
     <string name="harga_jual">Harga Jual</string>
     <string name="update_data_stok_barang">Update Data Stok Barang</string>
     <string name="data_barang">Data Barang</string>
+    <string name="uang_diterima">Uang Diterima</string>
 </resources>
