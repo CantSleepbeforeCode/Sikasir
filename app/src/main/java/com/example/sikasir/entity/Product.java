@@ -1,12 +1,23 @@
 package com.example.sikasir.entity;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Product implements Parcelable {
-    public String id, category, name, sum, sellingPrice, purchasePrice;
+import static com.example.sikasir.database.DatabaseContract.getColumnInt;
+import static com.example.sikasir.database.DatabaseContract.getColumnString;
+import static com.example.sikasir.database.DatabaseContract.productColumn.ID_PRODUCT;
+import static com.example.sikasir.database.DatabaseContract.productColumn.NUMBER_OF_PRODUCT;
+import static com.example.sikasir.database.DatabaseContract.productColumn.PRODUCT_CATEGORY;
+import static com.example.sikasir.database.DatabaseContract.productColumn.PRODUCT_NAME;
+import static com.example.sikasir.database.DatabaseContract.productColumn.PURCHASE_PRICE;
+import static com.example.sikasir.database.DatabaseContract.productColumn.SELLING_PRICE;
 
-    public Product(String id, String category, String name, String sum, String sellingPrice, String purchasePrice) {
+public class Product implements Parcelable {
+    public String id, category, name, sellingPrice, purchasePrice;
+    public int sum;
+
+    public Product(String id, String category, String name, int sum, String sellingPrice, String purchasePrice) {
         this.id = id;
         this.category = category;
         this.name = name;
@@ -39,11 +50,11 @@ public class Product implements Parcelable {
         this.name = name;
     }
 
-    public String getSum() {
+    public int getSum() {
         return sum;
     }
 
-    public void setSum(String sum) {
+    public void setSum(int sum) {
         this.sum = sum;
     }
 
@@ -63,6 +74,17 @@ public class Product implements Parcelable {
         this.purchasePrice = purchasePrice;
     }
 
+    public Product() {}
+
+    public Product(Cursor cursor) {
+        this.id = getColumnString(cursor, ID_PRODUCT);
+        this.category = getColumnString(cursor, PRODUCT_CATEGORY);
+        this.name = getColumnString(cursor, PRODUCT_NAME);
+        this.sum = getColumnInt(cursor, NUMBER_OF_PRODUCT);
+        this.sellingPrice = getColumnString(cursor, SELLING_PRICE);
+        this.purchasePrice = getColumnString(cursor, PURCHASE_PRICE);
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -73,7 +95,7 @@ public class Product implements Parcelable {
         dest.writeString(this.id);
         dest.writeString(this.category);
         dest.writeString(this.name);
-        dest.writeString(this.sum);
+        dest.writeInt(this.sum);
         dest.writeString(this.sellingPrice);
         dest.writeString(this.purchasePrice);
     }
@@ -82,7 +104,7 @@ public class Product implements Parcelable {
         this.id = in.readString();
         this.category = in.readString();
         this.name = in.readString();
-        this.sum = in.readString();
+        this.sum = in.readInt();
         this.sellingPrice = in.readString();
         this.purchasePrice = in.readString();
     }

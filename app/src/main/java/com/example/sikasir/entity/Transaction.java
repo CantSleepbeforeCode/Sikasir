@@ -1,7 +1,14 @@
 package com.example.sikasir.entity;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import static com.example.sikasir.database.DatabaseContract.getColumnString;
+import static com.example.sikasir.database.DatabaseContract.transactionColumn.ID_PRODUCT;
+import static com.example.sikasir.database.DatabaseContract.transactionColumn.ID_TRANSACTION;
+import static com.example.sikasir.database.DatabaseContract.transactionColumn.NUMBER_OF_PRODUCT;
+import static com.example.sikasir.database.DatabaseContract.transactionColumn.PAYMENT;
 
 public class Transaction implements Parcelable {
     private String id, numberOfProduct, payment, idProduct;
@@ -45,6 +52,14 @@ public class Transaction implements Parcelable {
         this.idProduct = idProduct;
     }
 
+    public Transaction() {}
+
+    public Transaction(Cursor cursor) {
+        this.id = getColumnString(cursor, ID_TRANSACTION);
+        this.numberOfProduct = getColumnString(cursor, NUMBER_OF_PRODUCT);
+        this.payment = getColumnString(cursor, PAYMENT);
+        this.idProduct = getColumnString(cursor, ID_PRODUCT);
+    }
 
     @Override
     public int describeContents() {
