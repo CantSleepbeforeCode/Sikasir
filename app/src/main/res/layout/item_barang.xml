@@ -14,6 +14,7 @@
         android:padding="@dimen/tiny_margin">
 
         <TextView
+            android:id="@+id/txt_product"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dummy_id"
@@ -22,6 +23,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cv_delete_product"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="@dimen/tiny_margin"
@@ -36,6 +38,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cv_update_product"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:padding="@dimen/tiny_margin">
