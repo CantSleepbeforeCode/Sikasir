@@ -35,6 +35,29 @@ public class ProductHelper {
         return this;
     }
 
+    public ArrayList<Product> queryById(String productId) {
+        ArrayList<Product> arrayList = new ArrayList<>();
+        Cursor cursor = sqLiteDatabase.query(DATABASE_TABLE_PRODUCT,
+                null,
+                ID_PRODUCT + " = ?",
+                new String[]{productId},
+                null,
+                null,
+                null,
+                null);
+        cursor.moveToFirst();
+        Product product = new Product();
+        product.setId(cursor.getString(cursor.getColumnIndexOrThrow(ID_PRODUCT)));
+        product.setCategory(cursor.getString(cursor.getColumnIndexOrThrow(PRODUCT_CATEGORY)));
+        product.setName(cursor.getString(cursor.getColumnIndexOrThrow(PRODUCT_NAME)));
+        product.setSum(cursor.getInt(cursor.getColumnIndexOrThrow(NUMBER_OF_PRODUCT)));
+        product.setSellingPrice(cursor.getString(cursor.getColumnIndexOrThrow(SELLING_PRICE)));
+        product.setPurchasePrice(cursor.getString(cursor.getColumnIndexOrThrow(PURCHASE_PRICE)));
+        arrayList.add(product);
+        cursor.close();
+        return arrayList;
+    }
+
     public ArrayList<Product> query() {
         ArrayList<Product> arrayList = new ArrayList<>();
         Cursor cursor = sqLiteDatabase.query(DATABASE_TABLE_PRODUCT,

@@ -33,6 +33,27 @@ public class TransactionHelper {
         return this;
     }
 
+    public ArrayList<Transaction> queryById(String productId) {
+        ArrayList<Transaction> arrayList = new ArrayList<>();
+        Cursor cursor = sqLiteDatabase.query(DATABASE_TABLE_TRANSACTION,
+                null,
+                ID_PRODUCT + " = ?",
+                new String[]{productId},
+                null,
+                null,
+                null,
+                null);
+        cursor.moveToFirst();
+        Transaction transaction = new Transaction();
+        transaction.setId(cursor.getString(cursor.getColumnIndexOrThrow(ID_TRANSACTION)));
+        transaction.setNumberOfProduct(cursor.getString(cursor.getColumnIndexOrThrow(NUMBER_OF_PRODUCT)));
+        transaction.setPayment(cursor.getString(cursor.getColumnIndexOrThrow(PAYMENT)));
+        transaction.setIdProduct(cursor.getString(cursor.getColumnIndexOrThrow(ID_PRODUCT)));
+        arrayList.add(transaction);
+        cursor.close();
+        return arrayList;
+    }
+
     public ArrayList<Transaction> query() {
         ArrayList<Transaction> arrayList = new ArrayList<>();
         Cursor cursor = sqLiteDatabase.query(DATABASE_TABLE_TRANSACTION,
@@ -64,7 +85,7 @@ public class TransactionHelper {
     public long insert(Transaction transaction) {
         open();
         ContentValues values = new ContentValues();
-        values.put(ID_TRANSACTION, transaction.getId());
+//        values.put(ID_TRANSACTION, transaction.getId());
         values.put(NUMBER_OF_PRODUCT, transaction.getNumberOfProduct());
         values.put(PAYMENT, transaction.getPayment());
         values.put(ID_PRODUCT, transaction.getIdProduct());

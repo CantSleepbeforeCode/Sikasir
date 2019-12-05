@@ -9,10 +9,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.sikasir.R;
+import com.example.sikasir.database.ProductHelper;
+import com.example.sikasir.entity.Product;
 
 public class InputStockActivity extends AppCompatActivity {
     EditText iptIdBarang, iptKategoriBarang, iptNamaBarang, iptJumlahBarang, iptHargaJualBarang, iptHargaBeliBarang;
     Button btnSimpan;
+    ProductHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +39,22 @@ public class InputStockActivity extends AppCompatActivity {
                 String jumlah = iptJumlahBarang.getText().toString();
                 String hargaJual = iptHargaJualBarang.getText().toString();
                 String hargaBeli = iptHargaBeliBarang.getText().toString();
-                if (!id.equals("") && !kategori.equals("") && !nama.equals("") && !jumlah.equals("") && !hargaJual.equals("") && !hargaBeli.equals("")) {
-                    
-                } else {
-                    Toast.makeText(getApplicationContext(), "Field tidak boleh ada kosong", Toast.LENGTH_SHORT).show();
+
+                try {
+                    if (!id.equals("") && !kategori.equals("") && !nama.equals("") && !jumlah.equals("") && !hargaJual.equals("") && !hargaBeli.equals("")) {
+                        Product product = new Product();
+                        product.setId(id);
+                        product.setCategory(kategori);
+                        product.setName(nama);
+                        product.setSum(Integer.parseInt(jumlah.trim()));
+                        product.setSellingPrice(hargaJual);
+                        product.setPurchasePrice(hargaBeli);
+                        helper.insert(product);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Field tidak boleh ada kosong", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (NumberFormatException e) {
+                    Toast.makeText(getApplicationContext(), "Field jumlah harus angka", Toast.LENGTH_SHORT).show();
                 }
             }
         });
