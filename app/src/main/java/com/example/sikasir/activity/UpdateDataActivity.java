@@ -36,8 +36,16 @@ public class UpdateDataActivity extends AppCompatActivity implements LoadDataCal
         adapter = new ProductAdapter(this);
         recyclerView.setAdapter(adapter);
 
+        helper = new ProductHelper(getApplicationContext());
+        helper.open();
+
         if (savedInstanceState == null) {
             new LoadProductAsync(helper, this).execute();
+        } else {
+            ArrayList<Product> list = savedInstanceState.getParcelableArrayList(EXTRA_STATE);
+            if (list != null) {
+                adapter.setListProduct(list);
+            }
         }
     }
 

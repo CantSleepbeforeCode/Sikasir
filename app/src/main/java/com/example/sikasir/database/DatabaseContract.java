@@ -36,6 +36,7 @@ public class DatabaseContract {
         public static String ID_TRANSACTION = "id_transaction";
         public static String NUMBER_OF_PRODUCT = "number_of_product";
         public static String PAYMENT = "payment";
+        public static String DATE = "date";
         public static String ID_PRODUCT = "id_product";
     }
 

@@ -29,11 +29,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             " %s TEXT NOT NULL," +
             " %s TEXT NOT NULL," +
             " %s TEXT NOT NULL," +
+            " %s TEXT NOT NULL," +
             " FOREIGN KEY(%s) REFERENCES %s(%s))",
             DatabaseContract.TABLE_TRANSACTION,
             DatabaseContract.transactionColumn.ID_TRANSACTION,
             DatabaseContract.transactionColumn.NUMBER_OF_PRODUCT,
             DatabaseContract.transactionColumn.PAYMENT,
+            DatabaseContract.transactionColumn.DATE,
             DatabaseContract.transactionColumn.ID_PRODUCT,
             DatabaseContract.transactionColumn.ID_PRODUCT,
             DatabaseContract.TABLE_PRODUCT,

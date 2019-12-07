@@ -5,19 +5,21 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import static com.example.sikasir.database.DatabaseContract.getColumnString;
+import static com.example.sikasir.database.DatabaseContract.transactionColumn.DATE;
 import static com.example.sikasir.database.DatabaseContract.transactionColumn.ID_PRODUCT;
 import static com.example.sikasir.database.DatabaseContract.transactionColumn.ID_TRANSACTION;
 import static com.example.sikasir.database.DatabaseContract.transactionColumn.NUMBER_OF_PRODUCT;
 import static com.example.sikasir.database.DatabaseContract.transactionColumn.PAYMENT;
 
 public class Transaction implements Parcelable {
-    private String id, numberOfProduct, payment, idProduct;
+    private String id, numberOfProduct, payment, idProduct, date;
 
-    public Transaction(String id, String numberOfProduct, String payment, String idProduct) {
+    public Transaction(String id, String numberOfProduct, String payment, String idProduct, String date) {
         this.id = id;
         this.numberOfProduct = numberOfProduct;
         this.payment = payment;
         this.idProduct = idProduct;
+        this.date = date;
     }
 
     public String getId() {
@@ -52,6 +54,14 @@ public class Transaction implements Parcelable {
         this.idProduct = idProduct;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public Transaction() {}
 
     public Transaction(Cursor cursor) {
@@ -59,6 +69,7 @@ public class Transaction implements Parcelable {
         this.numberOfProduct = getColumnString(cursor, NUMBER_OF_PRODUCT);
         this.payment = getColumnString(cursor, PAYMENT);
         this.idProduct = getColumnString(cursor, ID_PRODUCT);
+        this.date = getColumnString(cursor, DATE);
     }
 
     @Override
@@ -72,6 +83,7 @@ public class Transaction implements Parcelable {
         dest.writeString(this.numberOfProduct);
         dest.writeString(this.payment);
         dest.writeString(this.idProduct);
+        dest.writeString(this.date);
     }
 
     protected Transaction(Parcel in) {
@@ -79,9 +91,10 @@ public class Transaction implements Parcelable {
         this.numberOfProduct = in.readString();
         this.payment = in.readString();
         this.idProduct = in.readString();
+        this.date = in.readString();
     }
 
-    public static final Parcelable.Creator<Transaction> CREATOR = new Parcelable.Creator<Transaction>() {
+    public static final Creator<Transaction> CREATOR = new Creator<Transaction>() {
         @Override
         public Transaction createFromParcel(Parcel source) {
             return new Transaction(source);

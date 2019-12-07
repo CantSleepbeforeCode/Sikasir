@@ -12,10 +12,19 @@ import com.example.sikasir.R;
 import com.example.sikasir.database.ProductHelper;
 import com.example.sikasir.entity.Product;
 
+import java.util.ArrayList;
+
 public class InputStockActivity extends AppCompatActivity {
     EditText iptIdBarang, iptKategoriBarang, iptNamaBarang, iptJumlahBarang, iptHargaJualBarang, iptHargaBeliBarang;
     Button btnSimpan;
     ProductHelper helper;
+
+    private static final String EXTRA_ID = "EXTRA_ID";
+    private static final String EXTRA_CATEGORY = "EXTRA_CATEGORY";
+    private static final String EXTRA_NAME = "EXTRA_NAME";
+    private static final String EXTRA_SUM = "EXTRA_SUM";
+    private static final String EXTRA_SELLING = "EXTRA_SELLING";
+    private static final String EXTRA_PURCHASE = "EXTRA_PURCHASE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +39,15 @@ public class InputStockActivity extends AppCompatActivity {
         iptHargaBeliBarang = findViewById(R.id.ipt_harga_beli_barang);
         btnSimpan = findViewById(R.id.btn_simpan_barang);
 
+        if (savedInstanceState != null) {
+            iptIdBarang.setText(savedInstanceState.getString(EXTRA_ID));
+            iptKategoriBarang.setText(savedInstanceState.getString(EXTRA_CATEGORY));
+            iptNamaBarang.setText(savedInstanceState.getString(EXTRA_NAME));
+            iptJumlahBarang.setText(savedInstanceState.getString(EXTRA_SUM));
+            iptHargaJualBarang.setText(savedInstanceState.getString(EXTRA_SELLING));
+            iptHargaBeliBarang.setText(savedInstanceState.getString(EXTRA_PURCHASE));
+        }
+
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,14 +60,21 @@ public class InputStockActivity extends AppCompatActivity {
 
                 try {
                     if (!id.equals("") && !kategori.equals("") && !nama.equals("") && !jumlah.equals("") && !hargaJual.equals("") && !hargaBeli.equals("")) {
-                        Product product = new Product();
-                        product.setId(id);
-                        product.setCategory(kategori);
-                        product.setName(nama);
-                        product.setSum(Integer.parseInt(jumlah.trim()));
-                        product.setSellingPrice(hargaJual);
-                        product.setPurchasePrice(hargaBeli);
-                        helper.insert(product);
+                        helper = new ProductHelper(getApplicationContext());
+                        helper.open();
+                        ArrayList<Product> cekProduct = helper.queryById(id);
+                        if (cekProduct.size() == 0) {
+                            Product product = new Product();
+                            product.setId(id);
+                            product.setCategory(kategori);
+                            product.setName(nama);
+                            product.setSum(Integer.parseInt(jumlah.trim()));
+                            product.setSellingPrice(hargaJual);
+                            product.setPurchasePrice(hargaBeli);
+                            helper.insert(product);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Data dengan ID ini telah tersedia", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         Toast.makeText(getApplicationContext(), "Field tidak boleh ada kosong", Toast.LENGTH_SHORT).show();
                     }
@@ -58,5 +83,16 @@ public class InputStockActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(EXTRA_ID, iptIdBarang.getText().toString());
+        outState.putString(EXTRA_CATEGORY, iptKategoriBarang.getText().toString());
+        outState.putString(EXTRA_NAME, iptNamaBarang.getText().toString());
+        outState.putString(EXTRA_SUM, iptJumlahBarang.getText().toString());
+        outState.putString(EXTRA_SELLING, iptHargaJualBarang.getText().toString());
+        outState.putString(EXTRA_PURCHASE, iptHargaBeliBarang.getText().toString());
     }
 }

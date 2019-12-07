@@ -45,25 +45,37 @@
                 android:paddingBottom="@dimen/default_margin">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                </LinearLayout>
-
-                <EditText
-                    android:id="@+id/et_search_transaction"
+                    android:id="@+id/base_search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/tiny_margin"
-                    android:drawableEnd="@drawable/ic_search_purple"
-                    android:hint="@string/hint_transaction_search"/>
+                    android:layout_alignParentTop="true"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/et_search_transaction"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="@dimen/tiny_margin"
+                        android:hint="@string/hint_transaction_search"/>
+
+                    <ImageButton
+                        android:id="@+id/btn_search_transaction"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_search_purple"/>
+
+                </LinearLayout>
 
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="350dp"
-                    android:layout_below="@id/et_search_transaction">
+                    android:layout_below="@id/base_search">
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_transaction"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:listitem="@layout/item_transaction"/>

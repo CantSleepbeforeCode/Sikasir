@@ -30,6 +30,9 @@ public class LoginActivity extends AppCompatActivity {
     ProgressBar pgLoading;
     UserHelper userHelper;
 
+    private static final String EXTRA_USERNAME = "EXTRA_USERNAME";
+    private static final String EXTRA_PASSWORD = "EXTRA_PASSWORD";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +44,11 @@ public class LoginActivity extends AppCompatActivity {
         edtPassword = findViewById(R.id.ipt_password);
         btnLogin = findViewById(R.id.btn_login);
         pgLoading = findViewById(R.id.pb_loading);
+
+        if (savedInstanceState != null) {
+            edtUsername.setText(savedInstanceState.getString(EXTRA_USERNAME));
+            edtPassword.setText(savedInstanceState.getString(EXTRA_PASSWORD));
+        }
 
         TextView txtUserLevel = findViewById(R.id.txt_user_level);
 
@@ -64,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (currentUser != null) {
                         new Handler().postDelayed(new Runnable() {
                             public void run() {
-                                Intent intent = new Intent();
+                                Intent intent;
                                 pgLoading.setVisibility(View.INVISIBLE);
                                 if (userHelper.userLevel.equals(getIntent().getStringExtra(EXTRA_USER))) {
                                     intent = new Intent(LoginActivity.this, LandingActivity.class);
@@ -114,6 +122,13 @@ public class LoginActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(EXTRA_USERNAME, edtUsername.getText().toString());
+        outState.putString(EXTRA_PASSWORD, edtPassword.getText().toString());
     }
 
 }

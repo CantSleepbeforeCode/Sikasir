@@ -10,7 +10,6 @@ import com.example.sikasir.entity.Product;
 
 import java.util.ArrayList;
 
-import static android.provider.BaseColumns._ID;
 import static com.example.sikasir.database.DatabaseContract.TABLE_PRODUCT;
 import static com.example.sikasir.database.DatabaseContract.productColumn.ID_PRODUCT;
 import static com.example.sikasir.database.DatabaseContract.productColumn.NUMBER_OF_PRODUCT;
@@ -46,16 +45,19 @@ public class ProductHelper {
                 null,
                 null);
         cursor.moveToFirst();
-        Product product = new Product();
-        product.setId(cursor.getString(cursor.getColumnIndexOrThrow(ID_PRODUCT)));
-        product.setCategory(cursor.getString(cursor.getColumnIndexOrThrow(PRODUCT_CATEGORY)));
-        product.setName(cursor.getString(cursor.getColumnIndexOrThrow(PRODUCT_NAME)));
-        product.setSum(cursor.getInt(cursor.getColumnIndexOrThrow(NUMBER_OF_PRODUCT)));
-        product.setSellingPrice(cursor.getString(cursor.getColumnIndexOrThrow(SELLING_PRICE)));
-        product.setPurchasePrice(cursor.getString(cursor.getColumnIndexOrThrow(PURCHASE_PRICE)));
-        arrayList.add(product);
-        cursor.close();
-        return arrayList;
+        if (cursor.getCount() > 0) {
+            Product product = new Product();
+            product.setId(cursor.getString(cursor.getColumnIndexOrThrow(ID_PRODUCT)));
+            product.setCategory(cursor.getString(cursor.getColumnIndexOrThrow(PRODUCT_CATEGORY)));
+            product.setName(cursor.getString(cursor.getColumnIndexOrThrow(PRODUCT_NAME)));
+            product.setSum(cursor.getInt(cursor.getColumnIndexOrThrow(NUMBER_OF_PRODUCT)));
+            product.setSellingPrice(cursor.getString(cursor.getColumnIndexOrThrow(SELLING_PRICE)));
+            product.setPurchasePrice(cursor.getString(cursor.getColumnIndexOrThrow(PURCHASE_PRICE)));
+            arrayList.add(product);
+            cursor.close();
+            return arrayList;
+        }
+        return new  ArrayList<>();
     }
 
     public ArrayList<Product> query() {
@@ -66,7 +68,7 @@ public class ProductHelper {
                 null,
                 null,
                 null,
-                _ID + " ASC",
+                ID_PRODUCT + " ASC",
                 null);
         cursor.moveToFirst();
         Product product;
