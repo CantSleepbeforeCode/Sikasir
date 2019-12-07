@@ -56,6 +56,7 @@ public class InputTransactionActivity extends AppCompatActivity {
                 Date date = new Date();
                 SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                 String getDate = format.format(date);
+                Log.d("cekTanggal", getDate);
 
                 ProductHelper productHelper = new ProductHelper(getApplicationContext());
                 productHelper.open();
@@ -80,7 +81,7 @@ public class InputTransactionActivity extends AppCompatActivity {
 
                                 Snackbar.make(btnSimpan, "Transaksi Berhasil Dimasukkan", Snackbar.LENGTH_SHORT).show();
                             } else {
-                                Snackbar.make(btnSimpan, "Uang Kurang, harga barang " + isExist.get(0).getPurchasePrice(), Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(btnSimpan, "Uang Kurang, harga barang " + isExist.get(0).getSellingPrice(), Snackbar.LENGTH_SHORT).show();
                             }
                         } else {
                             Toast.makeText(getApplicationContext(), "Data dengan ID " + id + " Habis", Toast.LENGTH_SHORT).show();

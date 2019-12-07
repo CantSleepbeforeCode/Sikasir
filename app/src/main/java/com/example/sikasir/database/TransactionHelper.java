@@ -116,10 +116,11 @@ public class TransactionHelper {
     public long insert(Transaction transaction) {
         open();
         ContentValues values = new ContentValues();
-//        values.put(ID_TRANSACTION, transaction.getId());
+        values.put(ID_TRANSACTION, transaction.getId());
         values.put(NUMBER_OF_PRODUCT, transaction.getNumberOfProduct());
         values.put(PAYMENT, transaction.getPayment());
         values.put(ID_PRODUCT, transaction.getIdProduct());
+        values.put(DATE, transaction.getDate());
         return sqLiteDatabase.insert(DATABASE_TABLE_TRANSACTION, null, values);
     }
 

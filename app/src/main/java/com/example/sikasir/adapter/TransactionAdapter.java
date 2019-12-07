@@ -48,7 +48,8 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull TransactionViewHolder holder, int position) {
-        ProductHelper helper = new ProductHelper(activity);
+        ProductHelper helper = new ProductHelper(activity.getApplicationContext());
+        helper.open();
         ArrayList<Product> product = helper.queryById(listTransaction.get(position).getIdProduct());
         String productName = product.get(0).getName();
         holder.tvTransaction.setText(String.format("%s %s %s", listTransaction.get(position).getDate(),
