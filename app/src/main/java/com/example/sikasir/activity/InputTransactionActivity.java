@@ -68,7 +68,7 @@ public class InputTransactionActivity extends AppCompatActivity {
                     if (isExist.size() > 0) {
                         if (isExist.get(0).getSum() >= Integer.parseInt(sum)) {
                             int sumSellingPrice = Integer.parseInt(isExist.get(0).getSellingPrice()) * Integer.parseInt(sum);
-                            if ( sumSellingPrice < Integer.parseInt(money)) {
+                            if ( sumSellingPrice <= Integer.parseInt(money)) {
                                 Transaction transaction = new Transaction();
                                 transaction.setIdProduct(id);
                                 transaction.setNumberOfProduct(sum);

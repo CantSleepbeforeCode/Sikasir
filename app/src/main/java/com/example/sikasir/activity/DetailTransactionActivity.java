@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,10 +15,21 @@ import com.example.sikasir.database.ProductHelper;
 import com.example.sikasir.database.TransactionHelper;
 import com.example.sikasir.entity.Product;
 import com.example.sikasir.entity.Transaction;
+import com.google.android.material.snackbar.Snackbar;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
+
+import jxl.Workbook;
+import jxl.WorkbookSettings;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
 
 public class DetailTransactionActivity extends AppCompatActivity {
     TextView txtHeader, txtTitle, txtName, txtSum, txtIncome, txtOutcome;
@@ -45,11 +57,11 @@ public class DetailTransactionActivity extends AppCompatActivity {
         helper = new TransactionHelper(this);
         helper.open();
 
-        ArrayList<Transaction> transactions = helper.queryById(idTransaction);
+        final ArrayList<Transaction> transactions = helper.queryById(idTransaction);
 
-        ProductHelper productHelper = new ProductHelper(this);
+        final ProductHelper productHelper = new ProductHelper(this);
         productHelper.open();
-        ArrayList<Product> products = productHelper.queryById(transactions.get(0).getIdProduct());
+        final ArrayList<Product> products = productHelper.queryById(transactions.get(0).getIdProduct());
 
         int outcome = Integer.parseInt(transactions.get(0).getPayment()) - (Integer.parseInt(products.get(0).getSellingPrice()) * Integer.parseInt(transactions.get(0).getNumberOfProduct()));
 
@@ -63,7 +75,50 @@ public class DetailTransactionActivity extends AppCompatActivity {
         btnPrint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String fileName = "Transaksi_" + products.get(0).getId() + "_" + products.get(0).getName() + ".xls";
 
+                File sdCard = Environment.getExternalStorageDirectory();
+                File directory = new File(sdCard.getAbsolutePath() + "/transaction");
+
+                if (!directory.isDirectory()) {
+                    directory.mkdirs();
+                }
+
+                File file = new File(directory, fileName);
+
+                WorkbookSettings workbookSettings = new WorkbookSettings();
+                workbookSettings.setLocale(new Locale("en", "EN"));
+                WritableWorkbook workbook;
+
+                try {
+                    workbook = Workbook.createWorkbook(file, workbookSettings);
+                    WritableSheet sheet = workbook.createSheet("Transaction", 0);
+
+                    try {
+                        sheet.addCell(new Label(0, 0, "name"));
+                        sheet.addCell(new Label(1, 0, "sum"));
+                        sheet.addCell(new Label(2, 0, "income"));
+                        sheet.addCell(new Label(3, 0, "outcome"));
+
+                        sheet.addCell(new Label(0, 1, products.get(0).getName()));
+                        sheet.addCell(new Label(1, 1, transactions.get(0).getNumberOfProduct()));
+                        sheet.addCell(new Label(2, 1, transactions.get(0).getPayment()));
+                        sheet.addCell(new Label(3, 1, txtOutcome.getText().toString()));
+
+                    } catch (WriteException e) {
+                        e.printStackTrace();
+                    }
+                    workbook.write();
+                    try {
+                        workbook.close();
+                    } catch (WriteException e) {
+                        e.printStackTrace();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                Snackbar.make(btnPrint, "Transaksi Berhasil di print", Snackbar.LENGTH_SHORT).show();
             }
         });
     }

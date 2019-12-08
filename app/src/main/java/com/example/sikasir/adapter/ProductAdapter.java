@@ -15,6 +15,7 @@ import com.example.sikasir.R;
 import com.example.sikasir.activity.LandingActivity;
 import com.example.sikasir.activity.UpdateProductActivity;
 import com.example.sikasir.database.ProductHelper;
+import com.example.sikasir.database.TransactionHelper;
 import com.example.sikasir.entity.Product;
 import com.example.sikasir.util.CustomOnClickListener;
 
@@ -59,8 +60,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 helper.open();
                 helper.delete(listProduct.get(position).getId());
 
+                TransactionHelper transactionHelper = new TransactionHelper(activity.getApplicationContext());
+                transactionHelper.open();
+                transactionHelper.deleteByIdProduct(listProduct.get(0).getId());
+
                 Intent intent = new Intent(activity, LandingActivity.class);
-                intent.putExtra("KEY_USERLEVEL", "admin");
                 activity.startActivity(intent);
             }
         }));
