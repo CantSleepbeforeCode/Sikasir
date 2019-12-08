@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.DetailTransactionActivity">
+
+    <Toolbar
+        android:id="@+id/toolbar_add_stock"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:elevation="10dp"
+        android:background="@drawable/header_home"/>
+
+    <TextView
+        android:id="@+id/base_header_detail_transaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:elevation="10dp"
+        android:text="@string/base_header_detail_transaction"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_below="@id/toolbar_add_stock">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/default_margin">
+
+                <TextView
+                    android:id="@+id/title_transaction"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:text="@string/dummy_category"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:textColor="@android:color/white"
+                    android:background="@color/colorPurple"/>
+
+                <TextView
+                    android:id="@+id/base_name_detail_transaction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/title_transaction"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:text="@string/base_name"/>
+
+                <TextView
+                    android:id="@+id/base_sum_detail_transaction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/base_sum"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/tiny_margin"
+                    android:layout_below="@id/base_name_detail_transaction"/>
+
+                <TextView
+                    android:id="@+id/base_income_transaction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/base_income"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/tiny_margin"
+                    android:layout_below="@id/base_sum_detail_transaction"/>
+
+                <TextView
+                    android:id="@+id/base_outcome_transaction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/base_outcome"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/tiny_margin"
+                    android:layout_below="@id/base_income_transaction"/>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_print_transaction"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bt_uisquare"
+        android:layout_marginBottom="10dp"
+        android:text="@string/print"
+        android:textColor="@android:color/white"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

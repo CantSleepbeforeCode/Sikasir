@@ -1,7 +1,7 @@
 package com.example.sikasir.adapter;
 
 import android.app.Activity;
-import android.util.Log;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sikasir.R;
+import com.example.sikasir.activity.DetailTransactionActivity;
 import com.example.sikasir.database.ProductHelper;
 import com.example.sikasir.entity.Product;
 import com.example.sikasir.entity.Transaction;
+import com.example.sikasir.util.CustomOnClickListener;
 
 import java.util.ArrayList;
 
@@ -55,12 +57,14 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         holder.tvTransaction.setText(String.format("%s %s %s", listTransaction.get(position).getDate(),
                 productName,
                 listTransaction.get(position).getIdProduct()));
-        holder.baseTransaction.setOnClickListener(new View.OnClickListener() {
+        holder.baseTransaction.setOnClickListener(new CustomOnClickListener(position, new CustomOnClickListener.OnItemCallback() {
             @Override
-            public void onClick(View view) {
-                Log.d("berhasil", "yeay");
+            public void onItemClicked(View view, int position) {
+                Intent intent = new Intent(activity.getApplication(), DetailTransactionActivity.class);
+                intent.putExtra("EXTRA_ID", listTransaction.get(position).getId());
+                activity.startActivity(intent);
             }
-        });
+        }));
     }
 
     @Override

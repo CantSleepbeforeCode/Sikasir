@@ -16,9 +16,11 @@ import com.example.sikasir.entity.Product;
 import com.example.sikasir.entity.Transaction;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 public class InputTransactionActivity extends AppCompatActivity {
     EditText iptIdBarang, iptSumBarang, iptUangBayar;
@@ -50,7 +52,7 @@ public class InputTransactionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String id = iptIdBarang.getText().toString();
-                String sum = iptIdBarang.getText().toString();
+                String sum = iptSumBarang.getText().toString();
                 String money = iptUangBayar.getText().toString();
 
                 Date date = new Date();
@@ -64,8 +66,9 @@ public class InputTransactionActivity extends AppCompatActivity {
                 if (!id.equals("") && !sum.equals("")  && !money.equals("")) {
                     ArrayList<Product> isExist = productHelper.queryById(id);
                     if (isExist.size() > 0) {
-                        if (isExist.get(0).getSum() > 0) {
-                            if (Integer.parseInt(isExist.get(0).getSellingPrice()) < Integer.parseInt(money)) {
+                        if (isExist.get(0).getSum() >= Integer.parseInt(sum)) {
+                            int sumSellingPrice = Integer.parseInt(isExist.get(0).getSellingPrice()) * Integer.parseInt(sum);
+                            if ( sumSellingPrice < Integer.parseInt(money)) {
                                 Transaction transaction = new Transaction();
                                 transaction.setIdProduct(id);
                                 transaction.setNumberOfProduct(sum);
@@ -79,9 +82,21 @@ public class InputTransactionActivity extends AppCompatActivity {
                                 iptSumBarang.setText("");
                                 iptUangBayar.setText("");
 
+                                int newerSum = isExist.get(0).getSum() - Integer.parseInt(sum);
+
+                                Product product = new Product();
+                                product.setId(isExist.get(0).getId());
+                                product.setCategory(isExist.get(0).getCategory());
+                                product.setName(isExist.get(0).getName());
+                                product.setSum(newerSum);
+                                product.setPurchasePrice(isExist.get(0).getPurchasePrice());
+                                product.setSellingPrice(isExist.get(0).getSellingPrice());
+
+                                productHelper.update(product);
+
                                 Snackbar.make(btnSimpan, "Transaksi Berhasil Dimasukkan", Snackbar.LENGTH_SHORT).show();
                             } else {
-                                Snackbar.make(btnSimpan, "Uang Kurang, harga barang " + isExist.get(0).getSellingPrice(), Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(btnSimpan, "Uang Kurang, harga yang harus dibayar " + formatRupiah(sumSellingPrice), Snackbar.LENGTH_SHORT).show();
                             }
                         } else {
                             Toast.makeText(getApplicationContext(), "Data dengan ID " + id + " Habis", Toast.LENGTH_SHORT).show();
@@ -102,5 +117,11 @@ public class InputTransactionActivity extends AppCompatActivity {
         outState.putString(EXTRA_ID, iptIdBarang.getText().toString());
         outState.putString(EXTRA_SUM, iptSumBarang.getText().toString());
         outState.putString(EXTRA_MONEY, iptUangBayar.getText().toString());
+    }
+
+    private String formatRupiah(double currency) {
+        Locale locale = new Locale("in", "ID");
+        NumberFormat format = NumberFormat.getCurrencyInstance(locale);
+        return format.format(currency);
     }
 }

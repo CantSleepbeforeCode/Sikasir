@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -68,6 +69,7 @@ public class SeeTransactionActivity extends AppCompatActivity implements LoadTra
 
     @Override
     public void postExecute(ArrayList<Transaction> transactions) {
+        Log.d("totalData", String.valueOf(transactions.size()));
         if (transactions.size() > 0) {
            adapter.setListTransaction(transactions);
         } else {

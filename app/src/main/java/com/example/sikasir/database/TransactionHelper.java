@@ -38,7 +38,7 @@ public class TransactionHelper {
         ArrayList<Transaction> arrayList = new ArrayList<>();
         Cursor cursor = sqLiteDatabase.query(DATABASE_TABLE_TRANSACTION,
                 null,
-                ID_PRODUCT + " = ?",
+                ID_TRANSACTION + " = ?",
                 new String[]{productId},
                 null,
                 null,
@@ -70,15 +70,19 @@ public class TransactionHelper {
                 null,
                 null);
         cursor.moveToFirst();
+        Transaction transaction;
         if (cursor.getCount() > 0) {
-            Transaction transaction = new Transaction();
-            transaction.setId(cursor.getString(cursor.getColumnIndexOrThrow(ID_TRANSACTION)));
-            transaction.setNumberOfProduct(cursor.getString(cursor.getColumnIndexOrThrow(NUMBER_OF_PRODUCT)));
-            transaction.setPayment(cursor.getString(cursor.getColumnIndexOrThrow(PAYMENT)));
-            transaction.setIdProduct(cursor.getString(cursor.getColumnIndexOrThrow(ID_PRODUCT)));
-            transaction.setDate(cursor.getString(cursor.getColumnIndexOrThrow(DATE)));
-            arrayList.add(transaction);
-            cursor.close();
+            do {
+                transaction = new Transaction();
+                transaction.setId(cursor.getString(cursor.getColumnIndexOrThrow(ID_TRANSACTION)));
+                transaction.setNumberOfProduct(cursor.getString(cursor.getColumnIndexOrThrow(NUMBER_OF_PRODUCT)));
+                transaction.setPayment(cursor.getString(cursor.getColumnIndexOrThrow(PAYMENT)));
+                transaction.setIdProduct(cursor.getString(cursor.getColumnIndexOrThrow(ID_PRODUCT)));
+                transaction.setDate(cursor.getString(cursor.getColumnIndexOrThrow(DATE)));
+
+                arrayList.add(transaction);
+                cursor.moveToNext();
+            } while (!cursor.isAfterLast());
             return arrayList;
         }
         return new ArrayList<>();
