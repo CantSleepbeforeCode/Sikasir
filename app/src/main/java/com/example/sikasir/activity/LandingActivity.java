@@ -36,7 +36,11 @@ public class LandingActivity extends AppCompatActivity implements View.OnClickLi
         btnSeeTransaction.setOnClickListener(this);
         btnSignOut.setOnClickListener(this);
 
-        txtUsername.setText(String.format("Welcome, %s", getIntent().getStringExtra("KEY_USERNAME")));
+        if (getIntent().getStringExtra("KEY_USERNAME") == null) {
+            txtUsername.setText("Apa yang ingin anda lakukan hari ini?");
+        } else {
+            txtUsername.setText(String.format("Welcome, %s", getIntent().getStringExtra("KEY_USERNAME")));
+        }
     }
 
     @Override
@@ -56,7 +60,7 @@ public class LandingActivity extends AppCompatActivity implements View.OnClickLi
                 intent = new Intent(this, InputTransactionActivity.class);
                 break;
             case R.id.btn_update_data:
-                intent = new Intent(this, UpdateDataActivity.class);
+                intent = new Intent(this, SeeProductActivity.class);
                 break;
             default:
                 break;

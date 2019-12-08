@@ -102,7 +102,7 @@ public class ProductHelper {
         return sqLiteDatabase.insert(DATABASE_TABLE_PRODUCT, null, values);
     }
 
-    public int update(Product product) {
+    public int update(Product product, String oldId) {
         ContentValues values = new ContentValues();
         values.put(ID_PRODUCT, product.getId());
         values.put(PRODUCT_CATEGORY, product.getCategory());
@@ -110,7 +110,7 @@ public class ProductHelper {
         values.put(NUMBER_OF_PRODUCT, product.getSum());
         values.put(SELLING_PRICE, product.getSellingPrice());
         values.put(PURCHASE_PRICE, product.getPurchasePrice());
-        return sqLiteDatabase.update(DATABASE_TABLE_PRODUCT, values, ID_PRODUCT + " = '" + product.getId() + "';", null);
+        return sqLiteDatabase.update(DATABASE_TABLE_PRODUCT, values, ID_PRODUCT + " = '" + oldId + "';", null);
     }
 
     public int delete(String idProduct) {

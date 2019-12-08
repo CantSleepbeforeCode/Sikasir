@@ -1,39 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.UpdateDataActivity">
+    tools:context=".activity.UpdateProductActivity">
 
-    <Toolbar
-        android:id="@+id/toolbar_edit_stock"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:elevation="10dp"
-        android:background="@drawable/header_home"/>
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:elevation="10dp"
-        android:text="@string/update_data_stok_barang"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        <Toolbar
+            android:id="@+id/toolbar_add_stock"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:elevation="10dp"
+            android:background="@drawable/header_home"/>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar_edit_stock">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp"
+            android:elevation="10dp"
+            android:text="@string/update_data_stok_barang"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
         <RelativeLayout
+            android:id="@+id/rv_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/default_margin">
+            android:layout_marginTop="@dimen/default_margin"
+            android:layout_below="@id/toolbar_add_stock">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -48,7 +49,7 @@
                     android:paddingBottom="@dimen/default_margin">
 
                     <TextView
-                        android:id="@+id/tv_id_barang"
+                        android:id="@+id/tv_id_update_barang"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
@@ -58,10 +59,10 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/ipt_id_barang"
+                        android:id="@+id/ipt_id_update_barang"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_id_barang"
+                        android:layout_below="@+id/tv_id_update_barang"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
                         android:drawablePadding="30dp"
@@ -69,21 +70,21 @@
                         android:padding="10dp" />
 
                     <TextView
-                        android:id="@+id/tv_kategori_barang"
+                        android:id="@+id/tv_kategori_update_barang"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
-                        android:layout_below="@id/ipt_id_barang"
+                        android:layout_below="@id/ipt_id_update_barang"
                         android:text="@string/kategori_barang"
                         android:textColor="@color/colorPurple"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/ipt_kategori_barang"
+                        android:id="@+id/ipt_kategori_update_barang"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_kategori_barang"
+                        android:layout_below="@+id/tv_kategori_update_barang"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
                         android:drawablePadding="30dp"
@@ -91,21 +92,21 @@
                         android:padding="10dp" />
 
                     <TextView
-                        android:id="@+id/tv_nama_barang"
+                        android:id="@+id/tv_nama_update_barang"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
-                        android:layout_below="@id/ipt_kategori_barang"
+                        android:layout_below="@id/ipt_kategori_update_barang"
                         android:text="@string/nama_barang"
                         android:textColor="@color/colorPurple"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/ipt_nama_barang"
+                        android:id="@+id/ipt_nama_update_barang"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_nama_barang"
+                        android:layout_below="@+id/tv_nama_update_barang"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
                         android:drawablePadding="30dp"
@@ -113,21 +114,21 @@
                         android:padding="10dp" />
 
                     <TextView
-                        android:id="@+id/tv_jumlah_barang"
+                        android:id="@+id/tv_jumlah_update_barang"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
-                        android:layout_below="@id/ipt_nama_barang"
+                        android:layout_below="@id/ipt_nama_update_barang"
                         android:text="@string/jumlah_barang"
                         android:textColor="@color/colorPurple"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/ipt_jumlah_barang"
+                        android:id="@+id/ipt_jumlah_update_barang"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_jumlah_barang"
+                        android:layout_below="@+id/tv_jumlah_update_barang"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
                         android:drawablePadding="30dp"
@@ -135,21 +136,21 @@
                         android:padding="10dp" />
 
                     <TextView
-                        android:id="@+id/tv_harga_jual_barang"
+                        android:id="@+id/tv_harga_jual_update_barang"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
-                        android:layout_below="@id/ipt_jumlah_barang"
+                        android:layout_below="@id/ipt_jumlah_update_barang"
                         android:text="@string/harga_jual"
                         android:textColor="@color/colorPurple"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/ipt_harga_jual_barang"
+                        android:id="@+id/ipt_harga_jual_update_barang"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_harga_jual_barang"
+                        android:layout_below="@+id/tv_harga_jual_update_barang"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
                         android:drawablePadding="30dp"
@@ -157,21 +158,21 @@
                         android:padding="10dp" />
 
                     <TextView
-                        android:id="@+id/tv_harga_beli_barang"
+                        android:id="@+id/tv_harga_beli_update_barang"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
-                        android:layout_below="@id/ipt_harga_jual_barang"
-                        android:text="@string/kategori_barang"
+                        android:layout_below="@id/ipt_harga_jual_update_barang"
+                        android:text="@string/harga_beli"
                         android:textColor="@color/colorPurple"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/ipt_harga_beli_barang"
+                        android:id="@+id/ipt_harga_beli_update_barang"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tv_harga_beli_barang"
+                        android:layout_below="@+id/tv_harga_beli_update_barang"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp"
                         android:drawablePadding="30dp"
@@ -184,19 +185,20 @@
 
         </RelativeLayout>
 
-    </ScrollView>
+        <Button
+            android:id="@+id/btn_ubah_barang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/simpan"
+            android:textColor="@android:color/white"
+            android:background="@drawable/bt_uisquare"
+            android:layout_below="@id/rv_form"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:textAllCaps="false"
+            android:layout_marginBottom="@dimen/default_margin"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/simpan"
-        android:textColor="@android:color/white"
-        android:background="@drawable/bt_uisquare"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="@dimen/default_margin"
-        android:layout_marginEnd="@dimen/default_margin"
-        android:textAllCaps="false"
-        android:layout_marginBottom="@dimen/default_margin"/>
+    </RelativeLayout>
 
-</RelativeLayout>
+</ScrollView>

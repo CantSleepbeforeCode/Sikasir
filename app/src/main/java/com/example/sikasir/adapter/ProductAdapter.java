@@ -12,9 +12,11 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sikasir.R;
-import com.example.sikasir.activity.UpdateDataActivity;
+import com.example.sikasir.activity.LandingActivity;
+import com.example.sikasir.activity.UpdateProductActivity;
 import com.example.sikasir.database.ProductHelper;
 import com.example.sikasir.entity.Product;
+import com.example.sikasir.util.CustomOnClickListener;
 
 import java.util.ArrayList;
 
@@ -49,19 +51,25 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, final int position) {
         holder.tvProduct.setText(String.format("%s %s", listProduct.get(position).getId(), listProduct.get(position).getName()));
-        holder.cvDelete.setOnClickListener(new View.OnClickListener() {
+
+        holder.cvDelete.setOnClickListener(new CustomOnClickListener(position, new CustomOnClickListener.OnItemCallback() {
             @Override
-            public void onClick(View view) {
+            public void onItemClicked(View view, int position) {
                 ProductHelper helper = new ProductHelper(activity.getApplicationContext());
+                helper.open();
                 helper.delete(listProduct.get(position).getId());
+
+                Intent intent = new Intent(activity, LandingActivity.class);
+                intent.putExtra("KEY_USERLEVEL", "admin");
+                activity.startActivity(intent);
             }
-        });
+        }));
 
         holder.cvUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity, UpdateDataActivity.class);
-                intent.putExtra(UpdateDataActivity.EXTRA_ID_PRODUCT, listProduct.get(position));
+                Intent intent = new Intent(activity, UpdateProductActivity.class);
+                intent.putExtra("EXTRA_ID_PRODUCT", listProduct.get(position).getId());
                 activity.startActivity(intent);
             }
         });

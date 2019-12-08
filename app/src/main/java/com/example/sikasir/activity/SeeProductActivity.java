@@ -17,12 +17,10 @@ import com.google.android.material.snackbar.Snackbar;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-public class UpdateDataActivity extends AppCompatActivity implements LoadDataCallback {
-    public static final String EXTRA_ID_PRODUCT = "extra_id_product";
+public class SeeProductActivity extends AppCompatActivity implements LoadDataCallback {
 
     private RecyclerView recyclerView;
     private ProductAdapter adapter;
-    private ProductHelper helper;
     private static final String EXTRA_STATE = "EXTRA_STATE";
 
     @Override
@@ -36,7 +34,7 @@ public class UpdateDataActivity extends AppCompatActivity implements LoadDataCal
         adapter = new ProductAdapter(this);
         recyclerView.setAdapter(adapter);
 
-        helper = new ProductHelper(getApplicationContext());
+        ProductHelper helper = new ProductHelper(getApplicationContext());
         helper.open();
 
         if (savedInstanceState == null) {

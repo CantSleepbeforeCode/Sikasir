@@ -92,7 +92,7 @@ public class InputTransactionActivity extends AppCompatActivity {
                                 product.setPurchasePrice(isExist.get(0).getPurchasePrice());
                                 product.setSellingPrice(isExist.get(0).getSellingPrice());
 
-                                productHelper.update(product);
+                                productHelper.update(product, isExist.get(0).getId());
 
                                 Snackbar.make(btnSimpan, "Transaksi Berhasil Dimasukkan", Snackbar.LENGTH_SHORT).show();
                             } else {
