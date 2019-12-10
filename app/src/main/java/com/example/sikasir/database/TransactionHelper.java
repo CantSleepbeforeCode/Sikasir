@@ -141,7 +141,7 @@ public class TransactionHelper {
         return sqLiteDatabase.delete(DATABASE_TABLE_TRANSACTION, ID_TRANSACTION = " = '" + idTransaction + "';", null);
     }
 
-    public int deleteByIdProduct(String idProduct) {
-        return sqLiteDatabase.delete(DATABASE_TABLE_TRANSACTION, ID_PRODUCT = " = '" + idProduct + "';", null);
+    public boolean deleteByIdProduct(String idProduct) {
+        return sqLiteDatabase.delete(DATABASE_TABLE_TRANSACTION, ID_PRODUCT + "=" + idProduct, null) > 0;
     }
 }

@@ -1,6 +1,8 @@
 package com.example.sikasir.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.example.sikasir.activity.UpdateProductActivity;
 import com.example.sikasir.database.ProductHelper;
 import com.example.sikasir.database.TransactionHelper;
 import com.example.sikasir.entity.Product;
+import com.example.sikasir.entity.Transaction;
 import com.example.sikasir.util.CustomOnClickListener;
 
 import java.util.ArrayList;
@@ -55,17 +58,39 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
         holder.cvDelete.setOnClickListener(new CustomOnClickListener(position, new CustomOnClickListener.OnItemCallback() {
             @Override
-            public void onItemClicked(View view, int position) {
-                ProductHelper helper = new ProductHelper(activity.getApplicationContext());
-                helper.open();
-                helper.delete(listProduct.get(position).getId());
+            public void onItemClicked(View view, final int position) {
 
-                TransactionHelper transactionHelper = new TransactionHelper(activity.getApplicationContext());
-                transactionHelper.open();
-                transactionHelper.deleteByIdProduct(listProduct.get(0).getId());
+                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                builder.setCancelable(true);
+                builder.setTitle("Konfirmasi Penghapusan");
+                builder.setMessage("Apakah benar anda ingin menghapus data " + listProduct.get(position).getName() + "?");
+                builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ProductHelper helper = new ProductHelper(activity.getApplicationContext());
+                        helper.open();
+                        helper.delete(listProduct.get(position).getId());
 
-                Intent intent = new Intent(activity, LandingActivity.class);
-                activity.startActivity(intent);
+                        TransactionHelper transactionHelper = new TransactionHelper(activity.getApplicationContext());
+                        transactionHelper.open();
+                        ArrayList<Transaction> transactions = transactionHelper.queryById(listProduct.get(position).getId());
+                        if (transactions.size() > 0) {
+                            transactionHelper.deleteByIdProduct(listProduct.get(position).getId());
+                        }
+
+                        Intent intent = new Intent(activity, LandingActivity.class);
+                        intent.putExtra("KEY_USERLEVEL", "admin");
+                        activity.startActivity(intent);
+                    }
+                });
+                builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         }));
 

@@ -84,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                                     finish();
                                 } else {
                                     Toast.makeText(getApplicationContext(), getString(R.string.error_wrong_user_level), Toast.LENGTH_SHORT).show();
+                                    btnLogin.setEnabled(true);
                                 }
                             }
                         }, 3000);
