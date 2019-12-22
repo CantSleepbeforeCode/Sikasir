@@ -44,35 +44,24 @@
                 android:paddingTop="@dimen/default_margin"
                 android:paddingBottom="@dimen/default_margin">
 
-                <LinearLayout
-                    android:id="@+id/base_search"
+                <Button
+                    android:id="@+id/button_date_search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@string/masukkan_tanggal"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/bt_uisquare"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:layout_marginEnd="@dimen/default_margin"
+                    android:textAllCaps="false"
                     android:layout_alignParentTop="true"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/et_search_transaction"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="@dimen/tiny_margin"
-                        android:hint="@string/hint_transaction_search"/>
-
-                    <ImageButton
-                        android:id="@+id/btn_search_transaction"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ic_search_purple"/>
-
-                </LinearLayout>
+                    android:layout_marginBottom="@dimen/default_margin"/>
 
                 <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="350dp"
-                    android:layout_below="@id/base_search">
+                    android:layout_below="@id/button_date_search">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_transaction"

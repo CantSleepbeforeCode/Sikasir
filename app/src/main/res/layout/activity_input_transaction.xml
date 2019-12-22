@@ -64,49 +64,56 @@
                     android:inputType="text"
                     android:padding="10dp" />
 
-                <TextView
-                    android:id="@+id/tv_sum_barang"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/detail_layout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
+                    android:visibility="invisible"
                     android:layout_below="@id/ipt_id_barang"
-                    android:text="@string/jumlah_barang"
-                    android:textColor="@color/colorPurple"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/ipt_sum_barang"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_sum_barang"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:drawablePadding="30dp"
-                    android:inputType="text"
-                    android:padding="10dp" />
+                    <TextView
+                        android:id="@+id/tv_sum_barang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
 
-                <TextView
-                    android:id="@+id/tv_uang_bayar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="15dp"
-                    android:layout_below="@id/ipt_sum_barang"
-                    android:text="@string/uang_diterima"
-                    android:textColor="@color/colorPurple"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                        android:text="@string/jumlah_barang"
+                        android:textColor="@color/colorPurple"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/ipt_uang_bayar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_uang_bayar"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:drawablePadding="30dp"
-                    android:inputType="text"
-                    android:padding="10dp" />
+                    <Spinner
+                        android:id="@+id/ipt_sum_barang"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/sum_array"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:inputType="text"
+                        android:padding="10dp" />
+
+                    <TextView
+                        android:id="@+id/tv_uang_bayar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp"
+                        android:text="@string/uang_diterima"
+                        android:textColor="@color/colorPurple"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/ipt_uang_bayar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:drawablePadding="30dp"
+                        android:inputType="text"
+                        android:padding="10dp" />
+
+                </LinearLayout>
 
             </RelativeLayout>
 
@@ -115,12 +122,27 @@
     </RelativeLayout>
 
     <Button
+        android:id="@+id/btn_cari"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cari"
+        android:textColor="@android:color/white"
+        android:background="@drawable/bt_uisquare"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:textAllCaps="false"
+        android:layout_marginBottom="@dimen/default_margin"/>
+
+    <Button
         android:id="@+id/btn_simpan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/simpan"
         android:textColor="@android:color/white"
         android:background="@drawable/bt_uisquare"
+        android:visibility="invisible"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="@dimen/default_margin"

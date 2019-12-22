@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -19,17 +21,22 @@ import com.example.sikasir.entity.Transaction;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.lang.ref.WeakReference;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
-public class SeeTransactionActivity extends AppCompatActivity implements LoadTransactionCallback, View.OnClickListener {
-    EditText edtSearch;
-    ImageButton btnSearch;
+public class SeeTransactionActivity extends AppCompatActivity implements LoadTransactionCallback {
     RecyclerView recyclerView;
-
+    Button btnDatePicker;
+    DatePickerDialog datePickerDialog;
+    SimpleDateFormat simpleDateFormat;
     TransactionHelper helper;
     TransactionAdapter adapter;
+
+    String date = "";
+
     private static final String EXTRA_STATE = "EXTRA_STATE";
-    private static final String EXTRA_DATE = "EXTRA_DATE";
 
 
     @Override
@@ -37,9 +44,10 @@ public class SeeTransactionActivity extends AppCompatActivity implements LoadTra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_see_transaction);
 
-        edtSearch = findViewById(R.id.et_search_transaction);
-        btnSearch = findViewById(R.id.btn_search_transaction);
         recyclerView = findViewById(R.id.rv_transaction);
+        btnDatePicker = findViewById(R.id.button_date_search);
+        simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         adapter = new TransactionAdapter(this);
@@ -48,15 +56,18 @@ public class SeeTransactionActivity extends AppCompatActivity implements LoadTra
         helper = new TransactionHelper(getApplicationContext());
         helper.open();
 
-        btnSearch.setOnClickListener(this);
+        btnDatePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDateDialog();
+            }
+        });
 
         if (savedInstanceState != null) {
             ArrayList<Transaction> list = savedInstanceState.getParcelableArrayList(EXTRA_STATE);
             if (list != null) {
                 adapter.setListTransaction(list);
             }
-
-            edtSearch.setText(savedInstanceState.getString(EXTRA_DATE));
         }
     }
 
@@ -64,7 +75,6 @@ public class SeeTransactionActivity extends AppCompatActivity implements LoadTra
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(EXTRA_STATE, adapter.getListTransaction());
-        outState.putString(EXTRA_DATE, edtSearch.getText().toString());
     }
 
     @Override
@@ -74,15 +84,7 @@ public class SeeTransactionActivity extends AppCompatActivity implements LoadTra
            adapter.setListTransaction(transactions);
         } else {
             adapter.setListTransaction(new ArrayList<Transaction>());
-            Snackbar.make(recyclerView, "Tidak ada data pada tanggal " + edtSearch.getText(), Snackbar.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        if (view.getId() == R.id.btn_search_transaction) {
-            String dateKeySearch = edtSearch.getText().toString();
-            new LoadTransactionSync(helper, this, dateKeySearch).execute();
+            Snackbar.make(recyclerView, "Tidak ada data pada tanggal " + date, Snackbar.LENGTH_SHORT).show();
         }
     }
 
@@ -107,6 +109,28 @@ public class SeeTransactionActivity extends AppCompatActivity implements LoadTra
             super.onPostExecute(transactions);
             weakTransactionCallback.get().postExecute(transactions);
         }
+    }
+
+    private void showDateDialog() {
+        Calendar newCalendar = Calendar.getInstance();
+        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                Calendar newDate = Calendar.getInstance();
+                newDate.set(i, i1, i2);
+
+                date = simpleDateFormat.format(newDate.getTime());
+
+                search(date);
+
+            }
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+        datePickerDialog.show();
+    }
+
+    private void search(String date) {
+        new LoadTransactionSync(helper, this, date).execute();
     }
 }
 
