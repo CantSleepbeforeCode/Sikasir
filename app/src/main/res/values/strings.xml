@@ -41,6 +41,9 @@
     <string name="print">Print</string>
     <string name="cari">Cari</string>
     <string name="masukkan_tanggal">Masukkan Tanggal</string>
+    <string name="dummy_name">Nama Barang</string>
+    <string name="dummy_sum">10</string>
+    <string name="dummy_price">100000</string>
 
     <string-array name="sum_array">
         <item>1</item>

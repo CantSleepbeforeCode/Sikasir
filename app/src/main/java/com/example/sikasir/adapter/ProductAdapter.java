@@ -14,6 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sikasir.R;
+import com.example.sikasir.activity.DetailProductActivity;
 import com.example.sikasir.activity.LandingActivity;
 import com.example.sikasir.activity.UpdateProductActivity;
 import com.example.sikasir.database.ProductHelper;
@@ -102,6 +103,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 activity.startActivity(intent);
             }
         });
+
+        holder.cvDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, DetailProductActivity.class);
+                intent.putExtra("EXTRA_ID_PRODUCT", listProduct.get(position).getId());
+                activity.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -111,13 +121,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     class ProductViewHolder extends RecyclerView.ViewHolder {
         final TextView tvProduct;
-        final CardView cvDelete, cvUpdate;
+        final CardView cvDelete, cvUpdate, cvDetail;
 
         ProductViewHolder(View view) {
             super(view);
             tvProduct = view.findViewById(R.id.txt_product);
             cvDelete = view.findViewById(R.id.cv_delete_product);
             cvUpdate = view.findViewById(R.id.cv_update_product);
+            cvDetail = view.findViewById(R.id.card_item_detail);
         }
     }
 }

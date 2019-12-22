@@ -8,6 +8,7 @@
     android:gravity="center">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_item_detail"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginEnd="@dimen/tiny_margin"
